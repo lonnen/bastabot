@@ -1,0 +1,24 @@
+{
+    "name": "bastabot",
+    "description": "Matt Basta in IRC bot form",
+    "version": "0.1.0",
+    "author": {
+        "name": "Lonnen",
+        "email": "lonnen@mozilla.com",
+        "url": "https://xor.lonnen.com/"
+    },
+    "contributors": [],
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/lonnen/bastabot.git"
+    },
+    "dependencies" : {
+        "brain" : "==0.3.4",
+        "irc" : "==0.2.0",
+        "nomnom" : ">=0.4.2",
+        "twitter" : "==0.1.17"
+    },
+    "bin": {
+        "bastabot": "./bastabot.js"
+    }
+}
