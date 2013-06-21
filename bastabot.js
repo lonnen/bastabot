@@ -6,7 +6,7 @@ var brain = require("brain"),
         host: process.env.HOST || "irc.mozilla.org",
         nick: process.env.NICK || "bastabot",
         channels: process.env.CHANNELS || "#bots,#dangerzone",
-        redis: url.parse(process.env.RESITOGO_URL ||
+        redis: url.parse(process.env.REDISTOGO_URL ||
                          process.env.RESIS ||
                          "redis://localhost:6379")
     }
