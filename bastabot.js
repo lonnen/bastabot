@@ -14,7 +14,11 @@ var classifier = require("classifier"),
 
 // heroku needs the bot to bind to $PORT or it will kick the process
 var server = require('http')
-    server.createServer(function(){}).listen(process.env.PORT || 8080)
+    server.createServer(function(req, res){
+        res.writeHEAD(200, {'Content-Type': 'text/plain'});
+        res.end('ok');
+    })
+    server.listen(process.env.PORT || 8080, "127.0.0.1")
 
 var bayes = new classifier.Bayesian({
     backend: {
