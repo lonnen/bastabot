@@ -14,6 +14,7 @@ var classifier = require("classifier"),
 
 var bayes = new classifier.Bayesian({
     backend: {
+        type: "memory",
         options: {
             name: "bastabot"
         }
