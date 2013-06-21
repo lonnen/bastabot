@@ -14,12 +14,8 @@ var classifier = require("classifier"),
 
 var bayes = new classifier.Bayesian({
     backend: {
-        type: "redis",
         options: {
-            hostname: options.redis.hostname,
-            name: "bastabot",
-            password: options.redis.password,
-            port: options.redis.port
+            name: "bastabot"
         }
     },
     thresholds: {
