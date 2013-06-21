@@ -75,7 +75,9 @@ client.addListener("message", function(from, target, message) {
     }
 
     if (message.match(/fine/i) || message.match(/whatever/i)) {
+        console.log('fine')
         if (lastLine[target]) {
+            console.log('lastline')
             bayes.train(lastLine[target], "fine", function() {
                 client.say(target, "It's whatever. It's fine");
             });

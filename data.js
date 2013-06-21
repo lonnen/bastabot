@@ -44,10 +44,8 @@ function dump(options) {
 function createBayes(options) {
   return new brain.BayesianClassifier({
       backend: {
-          type: "redis",
+          type: "memory",
           options: {
-              hostname: options.redisHost,
-              port: options.redisPort,
               name: "bastabot"
           }
       }
