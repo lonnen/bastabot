@@ -59,6 +59,8 @@ client.addListener("message", function(from, target, message) {
         return;
     }
 
+    console.log('directed at bastabot')
+
     // below are messages targeted at bastabot
 
     // negative reinforcement
