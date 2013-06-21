@@ -40,6 +40,7 @@ client.addListener("error", function(msg) {
 });
 
 client.addListener("message", function(from, target, message) {
+    console.log(from, target, message);
     var target, isChannel = false;
 
     // ignore DMs
