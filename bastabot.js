@@ -20,7 +20,7 @@ var bayes = new brain.BayesianClassifier({
                       '//' +
                       options.redis.auth +
                       "@" +
-                      options.redis.hostname
+                      options.redis.hostname,
             port: options.redis.port,
             name: "bastabot"
         }
