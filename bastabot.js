@@ -13,8 +13,7 @@ var classifier = require("classifier"),
     lastLine = {};
 
 // heroku needs the bot to bind to $PORT or it will kick the process
-var server = require('http')
-    server.createServer(function(req, res){
+var server = require('http').createServer(function(req, res){
         res.writeHEAD(200, {'Content-Type': 'text/plain'});
         res.end('ok');
     })
