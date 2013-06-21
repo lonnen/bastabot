@@ -1,1 +1,1 @@
-web: node bastabot.js
+bot: node bastabot.js
