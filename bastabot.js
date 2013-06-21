@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var brain = require("brain"),
+var classifier = require("classifier"),
     irc = require("irc"),
     url = require("url"),
     options = {
@@ -7,22 +7,19 @@ var brain = require("brain"),
         nick: process.env.NICK || "bastabot",
         channels: process.env.CHANNELS || "#bots,#dangerzone",
         redis: url.parse(process.env.REDISTOGO_URL ||
-                         process.env.RESIS ||
+                         process.env.REDIS ||
                          "redis://localhost:6379")
     }
     lastLine = {};
 
-var bayes = new brain.BayesianClassifier({
+var bayes = new classifier.Bayesian({
     backend: {
         type: "redis",
         options: {
-            hostname: options.redis.protocol +
-                      '//' +
-                      options.redis.auth +
-                      "@" +
-                      options.redis.hostname,
-            port: options.redis.port,
-            name: "bastabot"
+            hostname: options.redis.hostname,
+            name: "bastabot",
+            password: options.redis.password,
+            port: options.redis.port
         }
     },
     thresholds: {
