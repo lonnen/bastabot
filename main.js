@@ -7,9 +7,9 @@ var classifier = require("classifier"),
         nick: process.env.NICK || "bastabot",
         channels: process.env.CHANNELS || "#bots,#dangerzone",
         redis: url.parse(process.env.REDISTOGO_URL ||
-                         process.env.REDIS ||
+                         process.env.REDIS_URL ||
                          "redis://localhost:6379")
-    }
+    },
     lastLine = {};
 
 var bayes = new classifier.Bayesian({
@@ -18,7 +18,7 @@ var bayes = new classifier.Bayesian({
         options: {
             hostname: options.redis.hostname,
             name: "bastabot",
-            password: options.redis.password,
+            password: options.redis.auth.split(":")[1],
             port: options.redis.port
         }
     },
@@ -43,16 +43,15 @@ client.addListener("error", function(msg) {
 });
 
 client.addListener("message", function(from, target, message) {
-    console.log(from, target, message);
-    var target, isChannel = false;
+    var isChannel = false;
 
     // ignore DMs
-    if (target.indexOf("#") != 0) {
+    if (target.indexOf("#") !== 0) {
         return;
     }
 
     // general chatter
-    if (message.indexOf(options.nick) != 0) {
+    if (message.indexOf(options.nick) !== 0) {
         lastLine[target] = message;
         bayes.classify(message, function(category) {
             if (category == "fine") {
@@ -61,8 +60,6 @@ client.addListener("message", function(from, target, message) {
         });
         return;
     }
-
-    console.log('directed at bastabot')
 
     // below are messages targeted at bastabot
 
@@ -78,9 +75,7 @@ client.addListener("message", function(from, target, message) {
     }
 
     if (message.match(/fine/i) || message.match(/whatever/i)) {
-        console.log('fine')
         if (lastLine[target]) {
-            console.log('lastline')
             bayes.train(lastLine[target], "fine", function() {
                 client.say(target, "It's whatever. It's fine");
             });
@@ -93,7 +88,7 @@ client.addListener("message", function(from, target, message) {
         if (lastLine[target]) {
             bayes.train(lastLine[target], "fine", function() {});
         }
-        return
+        return;
     }
 
     if (message.match(/botsnack/i)) {
@@ -115,3 +110,12 @@ client.addListener("invite", function(channel, from) {
         client.say(from, "Joined " + channel);
     });
 });
+
+
+// because paas needs bastabot to bind a port.
+var http = require('http');
+
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end("It's fine");
+}).listen(process.env.PORT || 1337);

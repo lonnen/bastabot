@@ -15,9 +15,6 @@
     "dependencies" : {
         "classifier" : "==0.1.0",
         "irc" : "==0.2.0",
-        "nomnom" : ">=0.4.2"
-    },
-    "bin": {
-        "bastabot": "./bastabot.js"
+        "nomnom" : "==0.4.2"
     }
 }

@@ -1,1 +1,1 @@
-bot: node bastabot.js
+bot: node main.js

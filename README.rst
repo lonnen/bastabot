@@ -30,7 +30,7 @@ Running
 
 Start bastabot from the command line::
 
-    $ node bastabot.js
+    $ node main.js
 
 Bastabot looks for configuration in the environment. Below they config keys are listed with their defaults::
 
